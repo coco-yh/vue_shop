@@ -1,7 +1,7 @@
 /*
  * @Author: coco
  * @Date: 2020-04-10 11:03:32
- * @LastEditTime: 2020-04-10 11:20:26
+ * @LastEditTime: 2020-04-11 00:10:25
  * @LastEditors: coco
  * @Description:
  * @FilePath: /vue_shop/src/router/index.js
@@ -9,15 +9,31 @@
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import Login from "@/components/login/Login";
+import Login from "@/components/login/Login";
+import Home from "@/components/home/Home";
+
 Vue.use(VueRouter);
 
 const routes = [
-  // { path: "/login", name: "login", component: Login }
+  { path: "/", redirect: "/login" },
+  { path: "/login", name: "login", component: Login },
+  { path: "/home", name: "home", component: Home }
 ];
 
 const router = new VueRouter({
   routes
+});
+// 挂载路由导航守卫--控制访问权限
+router.beforeEach((to, from, next) => {
+  // to 将要访问的路径
+  // from 代表从哪个路径跳转而来
+  // next是一个函数，表示放行
+  // next()放行，next('/login')强制跳转
+  if (to.path === "/login") return next();
+  //获取token
+  const tonkenStr = window.sessionStorage.getItem("token");
+  if (!tonkenStr) return next("/login");
+  next();
 });
 
 export default router;
