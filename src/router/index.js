@@ -1,7 +1,7 @@
 /*
  * @Author: coco
  * @Date: 2020-04-10 11:03:32
- * @LastEditTime: 2020-04-13 23:01:48
+ * @LastEditTime: 2020-04-14 15:32:38
  * @LastEditors: coco
  * @Description:
  * @FilePath: /vue_shop/src/router/index.js
@@ -16,6 +16,7 @@ import Users from '@/components/user/Users'
 import Rights from '@/components/power/Rights'
 import Roles from '@/components/power/Roles'
 import Cate from '@/components/goods/Cate'
+import Params from '@/components/goods/Params'
 
 Vue.use(VueRouter)
 
@@ -32,7 +33,8 @@ const routes = [
       { path: '/users', name: 'users', component: Users },
       { path: '/rights', name: 'rights', component: Rights },
       { path: '/roles', name: 'roles', component: Roles },
-      { path: '/categories', name: 'categories', component: Cate }
+      { path: '/categories', name: 'categories', component: Cate },
+      { path: '/params', name: 'params', component: Params }
     ]
   }
 ]
