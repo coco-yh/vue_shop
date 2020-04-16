@@ -1,7 +1,7 @@
 /*
  * @Author: coco
  * @Date: 2020-04-10 11:03:32
- * @LastEditTime: 2020-04-14 15:32:38
+ * @LastEditTime: 2020-04-15 11:39:40
  * @LastEditors: coco
  * @Description:
  * @FilePath: /vue_shop/src/router/index.js
@@ -17,6 +17,8 @@ import Rights from '@/components/power/Rights'
 import Roles from '@/components/power/Roles'
 import Cate from '@/components/goods/Cate'
 import Params from '@/components/goods/Params'
+import List from '@/components/goods/List'
+import Add from '@/components/goods/Add'
 
 Vue.use(VueRouter)
 
@@ -34,7 +36,9 @@ const routes = [
       { path: '/rights', name: 'rights', component: Rights },
       { path: '/roles', name: 'roles', component: Roles },
       { path: '/categories', name: 'categories', component: Cate },
-      { path: '/params', name: 'params', component: Params }
+      { path: '/params', name: 'params', component: Params },
+      { path: '/goods', name: 'goods', component: List },
+      { path: '/goods/add', name: 'add', component: Add }
     ]
   }
 ]
