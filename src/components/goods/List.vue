@@ -1,7 +1,7 @@
 <!--
  * @Author: coco
  * @Date: 2020-04-15 10:14:39
- * @LastEditTime: 2020-04-15 11:36:59
+ * @LastEditTime: 2020-04-16 15:51:26
  * @LastEditors: coco
  * @Description: 
  * @FilePath: /vue_shop/src/components/goods/List.vue
@@ -39,7 +39,12 @@
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" size="mini" icon="el-icon-edit"></el-button>
+            <el-button
+              type="primary"
+              size="mini"
+              icon="el-icon-edit"
+              @click="showEditDialog(scope.row.goods_id)"
+            ></el-button>
             <el-button
               type="danger"
               size="mini"
@@ -61,6 +66,34 @@
         background
       ></el-pagination>
     </el-card>
+    <!-- 修改，对话框 -->
+    <el-dialog
+      title="修改商品信息"
+      :visible.sync="editDialogVisible"
+      width="50%"
+      @close="editDialogClosed"
+    >
+      <el-form
+        :model="editListForm"
+        :rules="editListFormRules"
+        ref="editListFormRef"
+        label-width="100px"
+      >
+        <el-form-item label="商品名称">
+          <el-input v-model="editListForm.goods_name" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="商品价格" prop="goods_price">
+          <el-input v-model="editListForm.goods_price" type="number"></el-input>
+        </el-form-item>
+        <el-form-item label="商品重量" prop="goods_weight">
+          <el-input v-model="editListForm.goods_weight" type="number"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editGoods">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -79,7 +112,32 @@ export default {
       //商品列表
       goodsList: [],
       // 总数据条数
-      total: 0
+      total: 0,
+      //控制编辑对话框显示与隐藏
+      editDialogVisible: false,
+      editListForm: {
+        goods_name: '',
+        goods_price: '',
+        goods_weight: '',
+        goods_number: ''
+      },
+      editListFormRules: {
+        goods_price: [
+          {
+            required: true,
+            message: '请输入商品价格',
+            trigger: 'blur'
+          }
+        ],
+        goods_weight: [
+          {
+            required: true,
+            message: '请输入商品重量',
+            trigger: 'blur'
+          }
+        ]
+      },
+      goodsId: ''
     }
   },
   watch: {},
@@ -132,6 +190,36 @@ export default {
     },
     goAddPage() {
       this.$router.push('/goods/add')
+    },
+    // 显示编辑对话框
+    async showEditDialog(id) {
+      this.goodsId = id
+      this.editDialogVisible = true
+      const { data: res } = await this.$http.get('goods/' + id)
+      if (res.meta.status !== 200) {
+        return this.$message.error('查询商品失败')
+      }
+      // this.$message.success('查询商品成功')
+      console.log('111', res)
+      this.editListForm = res.data
+    },
+    editGoods() {
+      this.$refs.editListFormRef.validate(async valid => {
+        if (!valid) return
+        const { data: res } = await this.$http.put(
+          `goods/` + this.goodsId,
+          this.editListForm
+        )
+        if (res.meta.status !== 201) {
+          this.$message.error('修改商品信息失败')
+        }
+        this.$message.success('修改商品信息成功')
+        this.editDialogVisible = false
+        this.getGoodsList()
+      })
+    },
+    editDialogClosed() {
+      this.$refs.editListFormRef.resetFields()
     }
   },
   created() {
