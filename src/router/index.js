@@ -1,7 +1,7 @@
 /*
  * @Author: coco
  * @Date: 2020-04-10 11:03:32
- * @LastEditTime: 2020-04-16 15:59:05
+ * @LastEditTime: 2020-04-17 14:43:21
  * @LastEditors: coco
  * @Description:
  * @FilePath: /vue_shop/src/router/index.js
@@ -20,6 +20,7 @@ import Params from '@/components/goods/Params'
 import List from '@/components/goods/List'
 import Add from '@/components/goods/Add'
 import Order from '@/components/order/Order'
+import Report from '@/components/report/Report'
 
 Vue.use(VueRouter)
 
@@ -40,7 +41,8 @@ const routes = [
       { path: '/params', name: 'params', component: Params },
       { path: '/goods', name: 'goods', component: List },
       { path: '/goods/add', name: 'add', component: Add },
-      { path: '/orders', name: 'orders', component: Order }
+      { path: '/orders', name: 'orders', component: Order },
+      { path: '/reports', name: 'reports', component: Report }
     ]
   }
 ]
