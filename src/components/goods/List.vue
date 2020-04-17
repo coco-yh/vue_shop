@@ -1,7 +1,7 @@
 <!--
  * @Author: coco
  * @Date: 2020-04-15 10:14:39
- * @LastEditTime: 2020-04-16 15:51:26
+ * @LastEditTime: 2020-04-16 16:52:28
  * @LastEditors: coco
  * @Description: 
  * @FilePath: /vue_shop/src/components/goods/List.vue

@@ -1,7 +1,7 @@
 /*
  * @Author: coco
  * @Date: 2020-04-10 11:03:32
- * @LastEditTime: 2020-04-15 11:39:40
+ * @LastEditTime: 2020-04-16 15:59:05
  * @LastEditors: coco
  * @Description:
  * @FilePath: /vue_shop/src/router/index.js
@@ -19,6 +19,7 @@ import Cate from '@/components/goods/Cate'
 import Params from '@/components/goods/Params'
 import List from '@/components/goods/List'
 import Add from '@/components/goods/Add'
+import Order from '@/components/order/Order'
 
 Vue.use(VueRouter)
 
@@ -38,7 +39,8 @@ const routes = [
       { path: '/categories', name: 'categories', component: Cate },
       { path: '/params', name: 'params', component: Params },
       { path: '/goods', name: 'goods', component: List },
-      { path: '/goods/add', name: 'add', component: Add }
+      { path: '/goods/add', name: 'add', component: Add },
+      { path: '/orders', name: 'orders', component: Order }
     ]
   }
 ]
